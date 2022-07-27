@@ -1,5 +1,13 @@
 package main
 
+import (
+	c "fruites_crud/connect"
+	"fruites_crud/connect/db"
+)
+
 func main() {
-	server.Connect()
+
+	db.CreateDbConn()
+	c.Connect()
+
 }
