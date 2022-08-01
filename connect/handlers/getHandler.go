@@ -19,7 +19,7 @@ func GetFruites(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, res)
 		return
 	}
-	data := pkg.GetFruite()
+	data := pkg.GetFruitsService()
 
 	ress := gin.H{
 

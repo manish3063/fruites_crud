@@ -19,8 +19,8 @@ func UpdateFruitHandler(c *gin.Context) {
 		}
 		c.JSON(http.StatusBadGateway, res)
 	}
-	result := pkg.FruitUpdate(reqBody)
-
+	result := pkg.UpdateFruitsService(reqBody)
+	//fmt.Println("kkk", result)
 	if result == false {
 		res := gin.H{
 			"error": "Something went wrong",
@@ -30,7 +30,7 @@ func UpdateFruitHandler(c *gin.Context) {
 	}
 
 	res := gin.H{
-		"error": "Updated Successfully",
+		"status": "Updated Successfully",
 	}
 	c.JSON(http.StatusOK, res)
 	return

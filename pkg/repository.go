@@ -1,6 +1,7 @@
 package pkg
 
 import (
+	"fmt"
 	"fruites_crud/connect/db"
 	"log"
 )
@@ -16,10 +17,10 @@ func InsertFruite(reqBody Fruites) bool {
 	_, err2 := db.DB.Exec(sqlStatement, reqBody.FruitesName)
 
 	if err2 != nil {
-		//log.Fatal("ERror in insert: ", err2)
+		fmt.Println("kkkk", err2)
 		return false
 	}
-	//fmt.Println(user)
+
 	return result
 }
 
@@ -38,7 +39,7 @@ func GetFruite() []Fruites {
 		log.Println("Failed to execute query: ", err)
 		return Data
 	}
-	defer rows.Close()
+	//defer rows.Close()
 	detailFruits := Fruites{}
 
 	for rows.Next() {
@@ -51,16 +52,20 @@ func GetFruite() []Fruites {
 }
 
 //delete function ....
-func DelFruites(fruitId int) int {
-	a := 1
+func DelFruites(fruitId int) bool {
+	a := true
 	//msg := ""
+	// sqlStatement := `DELETE FROM fruite where id = $1`
+
+	// _, err := db.DB.Exec(sqlStatement, fruitId)
+
 	sqlStatement := `DELETE FROM fruite where id = $1`
 
 	_, err := db.DB.Exec(sqlStatement, fruitId)
 
 	if err != nil {
 		log.Println("ERror in deleting1: ", err)
-		a = 0
+		a = true
 		return a
 	}
 	return a
@@ -70,12 +75,16 @@ func DelFruites(fruitId int) int {
 
 func FruitUpdate(reqbody Fruites) bool {
 
-	SQL := `UPDATE fruite SET  fruite_name=$1 WHERE id=$2`
+	//SQL := `UPDATE fruite SET  fruite_name=$1 WHERE id=$2`
+
+	//SQL := `UPDATE fruite SET "id"=$1, "fruite_name"=$2`
+
+	SQL := `UPDATE fruite SET fruite_name = $1 WHERE id = $2`
 
 	_, err2 := db.DB.Exec(SQL, reqbody.FruitesName, reqbody.ID)
 
 	if err2 != nil {
-		//log.Fatal("ERror in update: ", err2)
+		log.Fatal("ERror in update: ", err2)
 		return false
 	}
 

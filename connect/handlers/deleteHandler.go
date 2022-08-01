@@ -20,8 +20,8 @@ func DeleteFruites(c *gin.Context) {
 		return
 	}
 
-	result := pkg.DelFruites(reqBody.ID)
-	if result == 0 {
+	result := pkg.DeleteFruitsService(reqBody.ID)
+	if result == false {
 		ress := gin.H{
 			"message": "error",
 		}

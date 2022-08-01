@@ -19,7 +19,7 @@ func CreateFruites(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, res)
 		return
 	}
-	result := pkg.InsertFruite(reqBody)
+	result := pkg.FruitInsertService(reqBody)
 
 	ress := gin.H{
 
